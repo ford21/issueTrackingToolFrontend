@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-success">
+    <p class="navbar-brand text-center">Welcome, {{userName}} to your Profile</p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<div class="container">
+    <div>
+        <button type="button" class="close" style="font-size:30px" aria-label="Close" (click)="goBackToPreviousPage()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="currentUser">
+        <form #editUserForm="ngForm" (ngSubmit)="save()" data-toggle="validator" novalidate="true">
+            <div class="form-group">
+                <label class="label">FirstName</label>
+                <input type="text" name="firstName" [(ngModel)]="currentUser.firstName" #firstName="ngModel"
+                    class="form-control" placeholder="Enter firstName" required="required"
+                    data-error="firststName is required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="label">LastName</label>
+                <input type="text" name="lastName" [(ngModel)]="currentUser.lastName" #lastName="ngModel"
+                    class="form-control" placeholder="Enter lastName" required="required"
+                    data-error="LastName is required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="label">Email</label>
+                <input type="text" name="repoter" [(ngModel)]="currentUser.email" #repoter="ngModel"
+                    class="form-control" disabled data-error="email required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="label">Gender</label>
+                <input type="text" name="gender" [(ngModel)]="currentUser.gender" #gender="ngModel" class="form-control"
+                    disabled data-error="gender required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="label">Created on</label>
+                <input type="text" name="date" [(ngModel)]="currentUser.createdOn" #date="ngModel" class="form-control"
+                    disabled data-error="date required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label class="label">Place</label>
+                <input type="text" name="place" [(ngModel)]="currentUser.place" #place="ngModel" class="form-control"
+                    data-error="place required">
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group text-center">
+                <input class="submit center-block btn btn-primary" [disabled]="!editUserForm.form.valid" value="Submit"
+                    type="submit">
+            </div>
+        </form>
+    </div>
+    <!-- </div> -->
+</div>

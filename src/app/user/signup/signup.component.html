@@ -1,0 +1,75 @@
+<div class="container-login">
+    <div class="wrap-login p-t-122 p-b-30">
+        <form class="login-form validate-form">
+
+            <div class="wrap-input validate-input m-b-10" data-validate="Firstname is required">
+                <input class="input" type="text" [(ngModel)]="firstName" name="firstName" placeholder="firstName"
+                    required />
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-user"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="Lastname is required">
+                <input class="input" type="text" [(ngModel)]="lastName" name="lastName" placeholder="lastName">
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-user"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="place is required">
+                <input class="input" type="text" [(ngModel)]="place" name="place" placeholder="place">
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-home"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="Gender is required">
+                <select name="Gender" class="form-control input" [(ngModel)]="gender" id="category" required>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <span class="focus-input" name="male"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-male"></i>
+                </span>
+                <span class="focus-input" name="female"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-female"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="email is required">
+                <input class="input" type="email" [(ngModel)]="email" name="email" placeholder="Email">
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-envelope"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="Password is required">
+                <input class="input" type="password" [(ngModel)]="password" name="password" placeholder="Password">
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+            <div class="wrap-input validate-input m-b-10" data-validate="Password is required">
+                <input class="input" type="password" [(ngModel)]="confirm" name="confirm"
+                    placeholder="Confirm Password">
+                <span class="focus-input"></span>
+                <span class="symbol-input">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+
+            <div class="container-login-form-btn p-t-10">
+                <button class="login-form-btn btn-block" type="button" (click)="signupFunction()">Sign Up</button>
+            </div>
+            <div class="text-center w-full p-t-20 p-b-230">
+                <i class="fa fa-long-arrow-left"></i>
+                <a class="txt1" [routerLink]="['/login']">
+                    Goto Login
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

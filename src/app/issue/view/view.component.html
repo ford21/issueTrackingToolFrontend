@@ -1,0 +1,124 @@
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-success">
+    <p class="navbar-brand text-center"></p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/home']">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/create']">Report a
+                    Bug</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/logout']"
+                    (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container" [hidden]="!currentIssue">
+    <div class="d-flex justify-content-between margin-bottom-15">
+        <a (click)="editIssue()"><i class="fa fa-edit" style="font-size:30px;color:blue"></i></a>
+        <a (click)="deleteThisIssue()"><i class="fa fa-trash-o" style="font-size:30px;color:red"></i></a>
+    </div>
+    <div *ngIf="currentIssue">
+        <form #form="ngForm">
+            <div class="form-group">
+                <label class="label">Issue Title</label>
+                <input type="text" name="IssueTitle" [(ngModel)]="currentIssue.title" #titleitle="ngModel"
+                    class="form-control" placeholder="Enter Issue Title" disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Description</label>
+                <input type="text" name="IssueDescription" [(ngModel)]="currentIssue.description" #description="ngModel"
+                    class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Issue Summary</label>
+                <!-- <textarea type="text" name="bigDescription" [(ngModel)]="currentIssue.bigDes" id="summary"
+                    #bigDes="ngModel" class="form-control" rows="5" disabled></textarea> -->
+                <ejs-richtexteditor type="text" name="bigDescription" [(ngModel)]="currentIssue.bigDes" id="summary"
+                    #bigDes="ngModel" class="form-control" disabled>
+                </ejs-richtexteditor>
+            </div>
+            <div class="form-group">
+                <label class="label">Status</label>
+                <input type="text" name="status" [(ngModel)]="currentIssue.status" #state="ngModel" class="form-control"
+                    placeholder="Status" disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Repoter</label>
+                <input type="text" name="repoter" [(ngModel)]="currentIssue.creator" #repoter="ngModel"
+                    class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Created on</label>
+                <input type="text" name="date1" [(ngModel)]="currentIssue.created" #date1="ngModel" class="form-control"
+                    disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Last Modified on</label>
+                <input type="text" name="date2" [(ngModel)]="currentIssue.lastModified" #date2="ngModel"
+                    class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label class="label">Assign To</label>
+                <select [(ngModel)]="currentIssue.assigned" #assigned="ngModel" name="assigned" class="form-control"
+                    id="assigned">
+                    <option *ngFor="let assign of assignee" [value]="assign.email">
+                        {{assign.firstName}} {{assign.lastName}} ({{assign.email}})</option>
+                </select>
+                <div class="text-right">
+                    <button class="btn btn-primary" (click)="assigning()">Assign</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+        <div>
+            <button class="btn btn-success" (click)="addWatcher()">Watcher</button>
+            <button class="btn btn-danger" (click)="removeWatcher()">Remove</button>
+        </div>
+        <div class="form-group">
+
+            <span [hidden]="watcher" style="font-size:20px; width: 30px;"><b><i>No Watchers on this Issue</i></b></span>
+            <span [hidden]="!watcher" style="font-size:20px; width: 30px;"><b><i>List of Watchers on this
+                        Issue</i></b></span>
+            <ul class="list-group" *ngFor="let watch of watcher">
+                <li class="margin-bottom-25" style="font-size:20px" [value]="watch">
+                    <span> {{watch.name}}</span>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <h3 for="name" class="text-center"><span style="font-size:30px;"
+                class="badge badge-dark rounded-circle fa fa-comments "> {{commentLength}} Comments</span></h3>
+        <hr>
+        <div class="form-group">
+            <textarea name="comment" id="comment" [(ngModel)]="commentBox" class="form-control" #comment="ngModel"
+                rows="7" placeholder="Comment..."></textarea>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary" (click)="commenting()">Comment</button>
+        </div>
+        <hr>
+        <div class="form-group" *ngFor="let comment of allComment">
+            <span class="fa fa-comments-o" style="font-size:20px; width: 30px;"></span>
+            <span class="fa fa-thumbs-up" style="font-size:20px; width: 30px;"></span>
+            <span class="fa fa-thumbs-down" style="font-size:20px; width: 30px;"></span>
+            <textarea style="border-width:0px;border:none;" rows="5" wrap="on" type="text" name="comment" id="comments"
+                class="form-control" disabled>{{comment.comment}}</textarea>
+            <p for="name"><span class="" style="font-size: 18px;"><b><i>{{comment.name}}</i></b></span><span class=""
+                    style="font-size: 13px;">, On {{comment.created | date}}</span></p>
+        </div>
+    </div>
+</div>
+<div class="container" [hidden]="currentIssue">
+    <div>
+        <h3>Issue Not Found or has been removed by the Reporter</h3>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-success">
+    <span class="badge badge-dark rounded-circle" style="font-size:30px;">{{firstChar.toUpperCase()}}</span>
+    <p class="navbar-brand">Welcome, <strong>
+            <em>{{userName.toUpperCase()}}</em>
+        </strong></p>
+    <button class="navbar-toggler justify-content-end" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" style="font-size:20px;cursor:pointer" [routerLink]="['/user-detail']"
+                    data-toggle="tooltip" title="Home">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:20px;cursor:pointer" [routerLink]="['/create']"
+                    data-toggle="tooltip" title="Report a bug">Report a
+                    Bug</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:20px;cursor:pointer" [routerLink]="['/login']" (click)="logout()"
+                    data-toggle="tooltip" title="Logout">Logout</a>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-center">
+            <div class="form-group">
+                <input class="form-control" name="searchBox" type="text" [(ngModel)]="searchBox" #search="ngModel"
+                    id="search" placeholder="Search" aria-label="Search" data-toggle="tooltip" title="Seach for title">
+            </div>
+            <button class="btn btn-warning" (click)="searchIssue()">Search</button>
+        </form>
+    </div>
+    <div class="container">
+        <span style="font-size:30px;cursor:pointer" class="fa fa-bell-o" data-toggle="modal"
+            data-target="#myModal"><span class="badge badge-dark rounded-circle"
+                [hidden]="!allNotifications">{{notificationLength}}</span></span>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Notifications</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" [hidden]="!allNotifications" *ngFor="let notification of allNotifications">
+                        <span data-dismiss="modal" style="font-size:20px;cursor:pointer"
+                            [routerLink]="['/view',notification.issueId]"
+                            (click)="clearNotification(notification.issueId,notification.email)">New
+                            '<em>{{notification.notifyChange}}</em>' on title <em>'{{notification.title}}'</em> @
+                            <em>'{{notification.byWhom}}'</em> </span>
+                    </div>
+                    <div class="modal-body text-center" [hidden]="allNotifications">
+                        <span data-dismiss="modal" style="font-size:20px;cursor:pointer"><em>You Have No
+                                Notifications</em></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="clearAll()">Clear
+                            all</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="text-center">
+    <h4 scope="col" [hidden]="srch">Search Results...</h4>
+</div>
+<div class="container">
+    <div class=" table-responsive" *ngIf="allIssue">
+        <table class="table table-hover table-striped table-condensed table-sm" style="font-size: 16px;">
+            <thead>
+                <tr [hidden]="!srch" class="info">
+                    <th scope="col" style="cursor:pointer" (click)="sortedData('title')">Title</th>
+                    <th scope="col" style="cursor:pointer" (click)="sortedData('creator')">Reporter</th>
+                    <th scope="col" style="cursor:pointer" (click)="sortedData('status')">Status</th>
+                    <th scope="col" style="cursor:pointer" (click)="sortedData('created')">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let issue of allIssue">
+                    <td [routerLink]="['/view',issue.trackingId]" style="cursor:pointer">{{issue.title | uppercase}}
+                    </td>
+                    <td [routerLink]="['/view',issue.trackingId]" style="cursor:pointer">{{issue.creator}}</td>
+                    <td [routerLink]="['/view',issue.trackingId]" style="cursor:pointer">{{issue.status}}</td>
+                    <td [routerLink]="['/view',issue.trackingId]" style="cursor:pointer">{{issue.created | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container" *ngIf="!allIssue">
+    <h3>Sorry couldn't find any Issue...</h3>
+</div>

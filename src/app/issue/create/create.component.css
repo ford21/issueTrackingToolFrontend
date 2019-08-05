@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+.container {
+    width: auto;
+    padding: 0 15px;
+  }
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+}
+input[type="text"], #state, #content {
+    font-size: 1.6rem;
+    color: #010100;
+    line-height: 50px;
+    height:40px;
+    padding-left: 3rem;
+    border-radius: 2rem
+}
+.text-white {
+    color: #fff!important;
+}
+.has-error input[type="text"], .has-error textarea, .has-error select {
+    border: 1px solid #ff0400;
+}
+

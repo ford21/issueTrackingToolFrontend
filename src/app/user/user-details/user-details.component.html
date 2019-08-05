@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-success">
+    <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776;</span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="text-center">
+        <p class="navbar-brand" style="font-size:30px">Track the details of others Users</p>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/home']">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/user-profile']">Edit User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/logout']"
+                    (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" style="font-size:30px;cursor:pointer" (click)="closeNav()">&times;</a>
+    <a class="text-center">Users</a>
+    <div *ngFor="let user of allUsers">
+        <a style="font-size:30px;cursor:pointer"
+            (click)="getdetails(user.email,user.firstName,user.lastName)">{{user.firstName}} {{user.lastName}}</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-center">
+        <h1><em>{{name.toUpperCase()}}</em></h1>
+    </div>
+    <hr>
+    <div class="container text-center" style="font-size:30px;">
+        <p>
+            <span style="cursor:pointer;" data-toggle="collapse" data-target="#drop1" (click)="closeNav()">
+                Created <span> {{created}} </span> Issues <span class="fa fa-edit"></span>
+                <div class="container" *ngIf="issueCreated">
+                    <div id="drop1" class="collapse" *ngFor="let title of issueCreated">
+                        <ul class="list-group">
+                            <li class="list-group-item text-success">{{title}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </span>
+        </p>
+        <p>
+            <span style="cursor:pointer;" data-toggle="collapse" data-target="#drop2" (click)="closeNav()">
+                Watcher on <span> {{watched}} </span> Issues <span class="fa fa-eye"></span>
+                <div class="container" *ngIf="issueWatcher">
+                    <div id="drop2" class="collapse" *ngFor="let title of issueWatcher">
+                        <ul class="list-group">
+                            <li class="list-group-item text-info">{{title}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </span>
+        </p>
+        <p>
+            <span style="cursor:pointer;" data-toggle="collapse" data-target="#drop3" (click)="closeNav()">
+                Assigned on <span> {{assigned}} </span> Issues <span class="fa fa-sticky-note-o"></span>
+                <div class="container" *ngIf="issueAssigned">
+                    <div id="drop3" class="collapse" *ngFor="let title of issueAssigned">
+                        <ul class="list-group">
+                            <li class="list-group-item text-warning">{{title}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </span>
+        </p>
+    </div>
+</div>

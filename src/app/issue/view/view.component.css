@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+.container {
+  width: auto;
+  padding: 0 25px;
+}
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    background: #0a583173;
+    opacity: 0.9;
+}
+
+input[type="text"], #state, #summary, #assigned {
+    font-size: 1.6rem;
+    color: #010100;
+    height:40px;
+    padding-left: 3rem;
+    border-radius: 2rem;
+}
+#comment {
+    font-size: 1.6rem;
+    height:100px;
+    border-radius: 1rem;
+}
+#comments {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    border-radius: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: #010100;
+    overflow: auto;
+    resize: auto;
+    outline: none;
+}
+.text-white {
+    color: #fff!important;
+}
+.label{
+    font-size: 1.6rem;
+    color: #010100;
+    line-height: 5px;
+}
+.has-error input[type="text"], .has-error textarea, .has-error select {
+    border: 1px solid #ff0400;
+}
+

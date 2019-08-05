@@ -1,0 +1,13 @@
+.container {
+  width: auto;
+  padding: 0 15px;
+}
+.mat-sort-header-container {
+  align-items: center;
+}
+
+@media (max-width: 400px) {  
+  .container {
+      font-size:10px !important;
+  }
+}

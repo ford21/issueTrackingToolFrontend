@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-dark bg-success">
+    <p class="navbar-brand text-center"></p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/home']">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="font-size:30px;cursor:pointer" [routerLink]="['/']"
+                    (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h3 class="margin-top-5 margin-bottom-5">Create an Issue</h3>
+    <form #createIssueForm="ngForm" (ngSubmit)="createIssue()" data-toggle="validator" novalidate="true">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="issueTitle" [(ngModel)]="issueTitle" id="title" #title="ngModel"
+                class="form-control" placeholder="Enter Issue Title" required="required"
+                data-error="Please enter Issue title">
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="issueDescription" [(ngModel)]="issueDescription" id="description"
+                #description="ngModel" class="form-control" placeholder="Enter Description for the Issue"
+                required="required" data-error="Please enter Issue Description">
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label for="content">Content of the Issue</label>
+            <!-- <textarea type="text" name="bigDescription" [(ngModel)]="bigDescription" id="content" #content="ngModel"
+                class="form-control" rows="4" required="required" placeholder="Enter Content for the Issue"
+                data-error="Please enter Content of the Issue"></textarea> -->
+            <ejs-richtexteditor type="text" name="bigDescription" [(ngModel)]="bigDescription" id="content"
+                #content="ngModel" class="form-control" rows="4" required="required"
+                placeholder="Enter Content for the Issue" data-error="Please enter Content of the Issue">
+            </ejs-richtexteditor>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select [(ngModel)]="status" #state="ngModel" name="status" class="form-control" id="state"
+                required="required" data-error="Please Select Issue status">
+                <option *ngFor="let state of states" [value]="state">{{state}}</option>
+            </select>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="d-flex justify-content-between margin-bottom-5">
+            <a (click)="goBackToPreviousPage()" class="btn btn-outline-primary">Cancel</a>
+            <button type="submit" class="btn btn-primary" [disabled]="!createIssueForm.form.valid"
+                type="submit">Create</button>
+        </div>
+    </form>
+</div>
